@@ -1,0 +1,29 @@
+#ddl-auto:update可以更新数据库中的表，依据实体类与数据库的映射
+#:后面要加一个空格，不然不会生效。
+spring:
+  thymeleaf:
+    mode: HTML
+    cache: false
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/newblog?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+#配置日志
+# level 日志级别
+# 设置全局为 info级别
+# com.blog包下为debug级别
+# file 设置日志文件的生成路径
+logging:
+  level:
+    root: info
+    com.wang.blog: debug
+
+
