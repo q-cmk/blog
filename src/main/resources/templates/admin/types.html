@@ -62,7 +62,7 @@
             </thead>
             <tbody>
             <tr th:each="type,iterStat:${page}">
-                <td th:text="${type.getId()}"></td>
+                <td th:text="${iterStat.count}"></td>
                 <td th:text="${type.name}">刻意练习清单</td>
                 <td>
                     <a href="#" th:href="@{/admin/types/{id}/input(id=${type.getId()})}" class="ui mini purple basic button">编辑</a>
@@ -75,9 +75,15 @@
             <tr>
                 <th colspan="6">
                     <div class="ui menu pagination" th:if="${page.totalPages}>1">
-                        <div class="item" th:unless="${page.first}"><a th:href="@{/admin/types}">首页</a></div>
+                        <div class="item" th:unless="${page.first}"><a th:href="@{/admin/types(page=0)}">首页</a></div>
                         <div class="item" th:unless="${page.first}"><a th:href="@{/admin/types(page=${page.number}-1)}" >上一页</a></div>
                         <div class="item" th:unless="${page.last}"><a th:href="@{/admin/types(page=${page.number}+1)}" >下一页</a></div>
+                        <div class="item" th:unless="${page.last}"><a th:href="@{/admin/types(page=${page.totalPages}-1)}">尾页</a></div>
+                    </div>
+                    <div class="ui segment m-inline-block">
+                        <p>
+                            当前第<span th:text="${page.number}+1"></span>页，总<span th:text="${page.totalPages}"></span>页，共<span th:text="${page.totalElements}"></span>条记录
+                        </p>
                     </div>
                     <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated purple basic button">新增</a>
                 </th>

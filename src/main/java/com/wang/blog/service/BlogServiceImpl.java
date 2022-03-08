@@ -64,11 +64,12 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog updateBlog(Long id, Blog blog) {
         Blog blog1 = blogRepository.findById(id).get();
-        if (blog==null){
+        if (blog1==null){
             throw new NotFoundException("该博客不存在");
         }
-        BeanUtils.copyProperties(blog1,blog);
-        return blogRepository.save(blog1);
+        blog.setUpdateTime(new Date());
+        BeanUtils.copyProperties(blog,blog1);
+        return blogRepository.save(blog);
     }
     @Transactional
     @Override

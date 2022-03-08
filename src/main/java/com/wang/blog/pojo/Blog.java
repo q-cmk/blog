@@ -18,6 +18,7 @@ public class Blog {
     private String firstPicture;//博客首图
     private String flag;//标签
     private Integer views;//浏览量
+    private String description;//博客描述
     private boolean appreciation;//是否赞赏
     private boolean shareStatement;//是否分享
     private boolean commentabled;//能否评论
@@ -185,6 +186,34 @@ public class Blog {
 
     public void setTagIds(String tagIds) {
         this.tagIds = tagIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void init(){
+        this.tagIds = tagsToIds(this.getTags());
+    }
+    private String tagsToIds(List<Tag> tags){
+        if (!tags.isEmpty()){
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for (Tag tag:tags){
+                if (flag){
+                    ids.append(",");
+                }else{
+                    flag=true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        }else{
+            return tagIds;
+        }
     }
 
     @Override

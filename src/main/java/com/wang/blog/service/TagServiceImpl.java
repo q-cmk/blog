@@ -47,6 +47,12 @@ public class TagServiceImpl implements TagService {
     public List<Tag> listTag(String ids) {
         return tagRepository.findAllById(convertToList(ids));
     }
+
+    /**
+     * 把tag id拼接的字符串转回 列表
+     * @param ids
+     * @return
+     */
     private List<Long> convertToList(String ids){
         ArrayList<Long> list = new ArrayList<>();
         if(!"".equals(ids)&& ids!=null){

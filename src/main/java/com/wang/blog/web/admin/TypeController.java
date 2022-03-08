@@ -22,7 +22,7 @@ public class TypeController {
     private TypeService typeService;
 
     @GetMapping("/types")
-    public String types(@PageableDefault(size = 4,sort = {"id"},direction = Sort.Direction.ASC)
+    public String types(@PageableDefault(size = 2,sort = {"id"},direction = Sort.Direction.ASC)
                                 Pageable pageable, Model modle){
         modle.addAttribute("page",typeService.listType(pageable));
         return "admin/types";

@@ -25,7 +25,7 @@ public class TagController {
     private TagService tagService;
 
     /**
-     *
+     *分页查询标签列表
      * @param pageable
      * @param blog
      * @param model
@@ -60,6 +60,14 @@ public class TagController {
         model.addAttribute("tag",tagService.getTag(id));
         return "admin/tags-input";
     }
+
+    /**
+     * 新增标签
+     * @param tag
+     * @param result
+     * @param attributes
+     * @return
+     */
     @PostMapping("/tags/input")
     public String input(@Valid Tag tag, BindingResult result, RedirectAttributes attributes){
         Tag tag1 = tagService.getTagByName(tag.getName());
@@ -80,7 +88,7 @@ public class TagController {
     }
 
     /**
-     *
+     *  修改标签
      * @param tag
      * @param result
      * @param attributes
@@ -102,6 +110,20 @@ public class TagController {
             attributes.addFlashAttribute("message", "操作成功");
         }
         return "redirect:/admin/tags";
-
     }
+
+    /**
+     * 删除标签
+     * @param id
+     * @param attributes
+     * @return
+     */
+    @GetMapping("/tags/{id}/delete")
+    public String deleteTag(@PathVariable long id,RedirectAttributes attributes){
+        tagService.delete(id);
+        attributes.addFlashAttribute("message","删除操作成功");
+        return "redirect:/admin/tags";
+    }
+
+
 }

@@ -63,7 +63,7 @@
                     <a href="#" th:href="@{/admin/tags/{id}/input(id=${tag.id})}"
                        class="ui mini teal basic button">编辑</a>
                     <a href="#"  onclick="return confirm('确定要删除么?')"
-                       th:href="@{admin/tags/{id}/delete}"
+                       th:href="@{/admin/tags/{id}/delete(id=${tag.id})}"
                        class="ui mini red basic button">删除</a>
                 </td>
             </tr>
@@ -71,17 +71,15 @@
             <tfoot>
             <tr>
                 <th colspan="6">
-                    <div class="ui mini pagination menu">
-                        <div class="item" th:unless="${page.first}"><a th:href="@{/admin/tags(page=${page.number}-1)}"
-                                >上一页</a>
-                        </div>
-                        <div class="item" th:unless="${page.last}"><a th:href="@{/admin/tags(page=${page.number}+1)}"
-                                >下一页</a>
-                        </div>
+                    <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                        <div class="item" th:unless="${page.first}"><a th:href="@{/admin/tags(page=0)}" >首页</a></div>
+                        <div class="item" th:unless="${page.first}"><a th:href="@{/admin/tags(page=${page.number}-1)}">上一页</a></div>
+                        <div class="item" th:unless="${page.last}"><a th:href="@{/admin/tags(page=${page.number}+1)}">下一页</a></div>
+                        <div class="item" th:unless="${page.last}"><a th:href="@{/admin/tags(page=${page.totalPages}-1)}">尾页</a></div>
                     </div>
                     <div class="ui segment m-inline-block">
                         <p>当前第<span th:text="${page.totalPages}>0?${page.number}+1:${page.number}"></span>页，总<span th:text="${page.totalPages}" ></span>页，共<span
-                        th:text="${page.getNumberOfElements()}"></span>条记录</p>
+                        th:text="${page.totalElements}"></span>条记录</p>
                     </div>
                     <a href="#" th:href="@{/admin/tags/input}" class="ui mini right floated teal basic button">新增</a>
                 </th>

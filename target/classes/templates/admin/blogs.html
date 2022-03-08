@@ -126,16 +126,14 @@
                     <!--th colspan是合并单元格-->
                     <th colspan="7">
                         <div class="ui menu pagination" th:if="${page.totalPages}>1">
-                            <div class="item" th:unless="${page.first}">
-                                <a onclick="page(this)" th:attr="data-page=${page.number}-1" >首页</a>
-                            </div>
+                            <div class="item" th:unless="${page.first}"><a onclick="page(this)" th:attr="data-page=0" >首页</a></div>
                             <div class="item" th:unless="${page.first}"><a onclick="page(this)" th:attr="data-page=${page.number}-1">上一页</a></div>
                             <div class="item" th:unless="${page.last}"><a onclick="page(this)" th:attr="data-page=${page.number}+1">下一页</a></div>
-                            <div class="item" th:unless="${page.last}"><a onclick="page(this)" th:attr="data-page=${page.number}+1">尾页</a></div>
+                            <div class="item" th:unless="${page.last}"><a onclick="page(this)" th:attr="data-page=${page.totalPages}-1">尾页</a></div>
                         </div>
                         <div class="ui segment m-inline-block">
                             <p>
-                                当前第<span th:text="${page.number}+1"></span>页，总<span th:text="${page.totalPages}"></span>页，共<span th:text="${page.getNumberOfElements()}"></span>条记录
+                                当前第<span th:text="${page.number}+1"></span>页，总<span th:text="${page.totalPages}"></span>页，共<span th:text="${page.totalElements}"></span>条记录
                             </p>
                         </div>
                         <a th:href="@{/admin/blogs/input}" class="ui mini right floated purple basic button">新增</a>
@@ -144,10 +142,10 @@
                 </tfoot>
             </table>
 
-            <div class="ui success message" >
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
                 <i class="close icon"></i>
                 <div class="header">提示：</div>
-                <p >恭喜，操作成功！</p>
+                <p th:text="${message}">恭喜，操作成功！</p>
             </div>
         </div>
 
