@@ -18,6 +18,7 @@ public interface TagService {
 
     //查询Tag 列表
     List<Tag> listTag();
+    List<Tag> listTagTop(Integer size);
 
     List<Tag> listTag(String ids);
 

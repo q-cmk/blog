@@ -15,11 +15,13 @@ public class Comment{
     private String email;
     private String content;
     private String avatar;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
 
     @ManyToOne()
     private Blog blog;
+
     @OneToMany(mappedBy = "parentComment")
     private List<Comment> replyComments = new ArrayList<>();
     @ManyToOne
