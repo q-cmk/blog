@@ -140,11 +140,10 @@
         <!--留言信息-->
         <div class="ui attached bottom segment"  th:if="${blog.commentabled}">
              <!--留言区域列表-->
-            <div id="comment-container" class="ui teal segment" >
+            <div id="comment-container" class="ui teal segment">
                 <div th:fragment="commentList" >
                     <div class="ui threaded comments" style="max-width: 100%;">
                         <h3 class="ui dividing header">评论</h3>
-
                         <div class="comment" th:each="comment:${comments}">
                             <!--评论的头像部分-->
                             <a class="avatar">
@@ -209,7 +208,7 @@
             <!--提交新评论的表单-->
             <div id="comment-form" class="ui form" method="post">
                 <input type="hidden" name="blog.id" th:value="${blog.id}">
-                <input  name="parentComment.id" value="-1">
+                <input type="hidden" name="parentComment.id" value="-1">
                 <div class="field">
                     <textarea name="content" placeholder="请输入评论信息..."></textarea>
                 </div>
@@ -354,7 +353,7 @@
     });
 
     $(function () {
-        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.getId()})}]]*/"/comments/27");
+        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/{id}(id=${blog.id})");
     })
     //校验
     $('#commentpost-btn').click(function () {
