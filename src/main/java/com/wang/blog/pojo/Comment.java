@@ -14,6 +14,7 @@ public class Comment{
     private String name;
     private String email;
     private String content;
+    private String nickname;
     private String avatar;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -26,6 +27,16 @@ public class Comment{
     private List<Comment> replyComments = new ArrayList<>();
     @ManyToOne
     private Comment parentComment;
+
+    private boolean adminComment;
+
+    public boolean isAdminComment() {
+        return adminComment;
+    }
+
+    public void setAdminComment(boolean adminComment) {
+        this.adminComment = adminComment;
+    }
 
     public List<Comment> getReplyComments() {
         return replyComments;
@@ -100,6 +111,14 @@ public class Comment{
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override

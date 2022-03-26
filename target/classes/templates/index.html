@@ -132,14 +132,14 @@
                                 <i class="idea icon"></i>分类
                             </div>
                             <div class="right aligned column">
-                                <a href="#" th:href="@{/types}" target="_blank">more <i
+                                <a href="#" th:href="@{/types/-1}" target="_blank">more <i
                                         class="angle double right icon"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="ui purple segment" th:each="type:${types}">
-                        <div class="ui fluid vertical menu">
-                            <a href="#" target="_blank" class="item">
+                    <div class="ui purple segment">
+                        <div class="ui fluid vertical menu" th:each="type:${types}">
+                            <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item">
                                 <span th:text="${type.name}">学习日志</span>
                                 <div class="ui purple basic left pointing label" th:text="${type.blogs.size()}">13</div>
                             </a>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="ui purple segment" th:each="tag:${tags}">
-                        <a href="#" target="_blank" class="ui purple basic left pointing label m-margin-tb-tiny">
+                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui purple basic left pointing label m-margin-tb-tiny">
                             <span th:text="${tag.name}">方法论</span>
                             <div class="detail" th:text="${tag.blogs.size()}">23</div>
                         </a>

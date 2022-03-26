@@ -52,20 +52,10 @@ public class IndexController {
         return "blog";
     }
 
-
-
-    @GetMapping("/types")
-    public String type(Model model){
-        model.addAttribute("types",typeService.listType());
-        return "types";
-    }
-    @GetMapping("/tags")
-    public String tags(){
-        return "tags";
-    }
-    @GetMapping("/about")
-    public String about(){
-        return "about";
+    @GetMapping("/footer/newblog")
+    public String newblogs(Model model){
+        model.addAttribute("newblogs",blogService.listRecommendBlogTop(3));
+        return "_fragments :: newblogList";
     }
 
 }

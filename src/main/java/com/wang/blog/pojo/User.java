@@ -15,6 +15,7 @@ public class User {
     private String username;
     private String password;
     private String avatar;
+    private String email;
     private Integer type;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
@@ -32,6 +33,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {

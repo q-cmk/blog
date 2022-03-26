@@ -31,7 +31,7 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-
+<!--中间内容-->
 <div class="m-container m-padded-tb-big m-container-small">
     <div class="ui container">
         <!--头部-->
@@ -52,53 +52,52 @@
 
             <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
                 <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic  button"
+                   th:classappend="${type.id==activeTypeId} ? 'teal'"
                     th:text="${type.name}">思考与感悟</a>
                 <div class="ui basic  left pointing label"
+                     th:classappend="${type.id==activeTypeId} ? 'teal'"
                      th:text="${#arrays.length(type.blogs)}">24
                 </div>
             </div>
 
-
         </div>
-
-        <!--博客-->
-        <!--加top就与分类分隔开了-->
-        <div class="ui top attached purple  segment">
-            <div class="ui padded vertical segment m-padded-tb-large" >
+        <!--content-->
+        <div class="ui top attached teal segment">
+            <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page}">
                 <div class="ui middle aligned mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="ui header"><a href="#"  target="_blank"
-                                                 class="m-black" >你真的理解什么是财富自由吗?</a></h3>
-                        <p class="m-text" th:text=>
+                        <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+                                                 class="m-black" th:text="${blog.title}">你真的理解什么是财富自由吗?</a></h3>
+                        <p class="m-text" th:text="|${blog.description}......|">
                             正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
                         <div class="ui grid">
                             <div class="eleven wide column">
                                 <div class="ui mini horizontal link list">
                                     <div class="item">
-                                        <img src="https://unsplash.it/100/100?image=1005"
+                                        <img src="https://unsplash.it/100/100?image=1005" th:src="@{${blog.user.avatar}}"
                                              alt="" class="ui avatar image">
                                         <div class="content"><a href="#" class="header"
-                                                                >李仁密</a></div>
+                                                                th:text="${blog.user.username}">李仁密</a></div>
                                     </div>
                                     <div class="item">
                                         <i class="calendar icon"></i><span
-                                            th:text="${#dates.format(,'yyyy-MM-dd')}">2017-10-01</span>
+                                            th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2017-10-01</span>
                                     </div>
                                     <div class="item">
-                                        <i class="eye icon"></i> <span >2342</span>
+                                        <i class="eye icon"></i> <span th:text="${blog.views}">2342</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="right aligned five wide column">
                                 <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin"
-                                   >认知升级</a>
+                                   th:text="${blog.type.name}">认知升级</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="five wide column">
-                        <a href="#"  target="_blank">
-                            <img src="https://unsplash.it/800/450?image=1005" alt=""
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                            <img src="https://unsplash.it/800/450?image=1005" th:src="@{${blog.firstPicture}}" alt=""
                                  class="ui rounded image">
                         </a>
                     </div>
@@ -106,7 +105,17 @@
                 </div>
             </div>
         </div>
-
+        <!--footer-->
+        <div class="ui bottom attached segment">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <div class="item"><a class="ui mini purple basic button">上一页</a></div>
+                </div>
+                <div class="right aligned column">
+                    <div class="item"><a class="ui mini purple basic button">下一页</a></div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
@@ -115,6 +124,7 @@
 <br>
 <!--底部footer-->
 <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+
     <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
             <div class="three wide column">
@@ -149,8 +159,10 @@
 
 </footer>
 
+<th:block th:replace="_fragments :: script">
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+</th:block>
 
 <script>
     $('.menu.toggle').click(function () {

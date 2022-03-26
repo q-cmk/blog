@@ -1,5 +1,7 @@
 #ddl-auto:update可以更新数据库中的表，依据实体类与数据库的映射
 #:后面要加一个空格，不然不会生效。
+comment.avatar: /image/1.jpg
+
 spring:
   thymeleaf:
     mode: HTML
@@ -15,6 +17,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  messages:
+    basename: i18n/messages
 
 #配置日志
 # level 日志级别
@@ -25,5 +29,7 @@ logging:
   level:
     root: info
     com.wang.blog: debug
+
+
 
 
