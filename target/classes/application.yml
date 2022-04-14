@@ -1,6 +1,6 @@
 #ddl-auto:update可以更新数据库中的表，依据实体类与数据库的映射
 #:后面要加一个空格，不然不会生效。
-comment.avatar: /image/1.jpg
+comment.avatar: /image/tourist.jpg
 
 spring:
   thymeleaf:

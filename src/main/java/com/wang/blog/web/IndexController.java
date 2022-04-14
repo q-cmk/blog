@@ -1,6 +1,7 @@
 package com.wang.blog.web;
 
 import com.wang.blog.service.BlogService;
+import com.wang.blog.service.CommentService;
 import com.wang.blog.service.TagService;
 import com.wang.blog.service.TypeService;
 import com.wang.blog.vo.BlogQuery;
@@ -24,6 +25,9 @@ public class IndexController {
     @Autowired
     public TagService tagService;
 
+    @Autowired
+    public CommentService commentService;
+
     /**
      * 博客首页
      * @param pageable
@@ -31,7 +35,7 @@ public class IndexController {
      * @return
      */
     @RequestMapping("/")
-    public String index(@PageableDefault(size = 2,sort = {"updateTime"},direction = Sort.Direction.DESC) Pageable pageable
+    public String index(@PageableDefault(size = 3,sort = {"updateTime"},direction = Sort.Direction.DESC) Pageable pageable
             , Model model){
         model.addAttribute("page",blogService.listBlog(pageable));
         model.addAttribute("types",typeService.listTypeTop(2));
@@ -46,9 +50,10 @@ public class IndexController {
         model.addAttribute("query",query);
         return "search";
     }
-    @GetMapping("blog/{id}")
+    @GetMapping("/blog/{id}")
     public String blog(@PathVariable Long id,Model model){
         model.addAttribute("blog",blogService.getAndConvert(id));
+        model.addAttribute("comments",commentService.listCommentByBlogId(id));
         return "blog";
     }
 
