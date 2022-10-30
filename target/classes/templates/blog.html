@@ -43,7 +43,6 @@
 <!--中间内容-->
 <div class="m-container m-padded-tb-big m-container-small animated fadeIn">
     <div class="ui container">
-
         <!--头部-->
         <div class="ui top attached segment">
             <div class="ui horizontal link list">
@@ -207,31 +206,37 @@
             </div>
             <!--提交新评论的表单-->
             <div id="comment-form" class="ui form" method="post">
+                <!--博客id,隐藏-->
                 <input type="hidden" name="blog.id" th:value="${blog.id}">
+                <!--父评论id,隐藏-->
                 <input type="hidden" name="parentComment.id" value="-1">
+                <!--评论内容-->
                 <div class="field">
                     <textarea name="content" placeholder="请输入评论信息..."></textarea>
                 </div>
+                <!--评论人信息-->
                 <div class="fields">
+                    <!--昵称-->
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
                             <input type="text" name="nickname" placeholder="姓名" th:value="${session.user}!=null? ${session.user.nickname}">
                         </div>
                     </div>
+                    <!--邮箱-->
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="mail icon"></i>
                             <input type="text" name="email" placeholder="邮箱" th:value="${session.user}!=null? ${session.user.email}">
                         </div>
                     </div>
+                    <!--发布-->
                     <div class="field  m-margin-bottom-small m-mobile-wide">
                         <button id="commentpost-btn" type="button"  class="ui teal button m-mobile-wide"><i
                                 class="edit icon"></i>发布
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -245,12 +250,11 @@
         <a href="#" class="ui purple icon button"><i class="chevron up icon"></i> </a>
     </div>
 </div>
+
 <!--目录-->
 <div class="ui toc-container flowing popup transition hidden" style="width: 250px">
     <ol class="js-toc">
     </ol>
-</div>
-
 </div>
 
 <br>

@@ -9,8 +9,8 @@ import java.util.List;
 @Table(name = "t_comment")
 public class Comment{
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id=0L;
     private String name;
     private String email;
     private String content;

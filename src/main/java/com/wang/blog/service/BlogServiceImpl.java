@@ -6,6 +6,7 @@ import com.wang.blog.pojo.Blog;
 import com.wang.blog.pojo.Type;
 import com.wang.blog.util.MarkdownUtils;
 import com.wang.blog.util.MyBeanUtils;
+import com.wang.blog.util.RedisUtil;
 import com.wang.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.*;
@@ -24,6 +26,9 @@ import java.util.*;
 public class BlogServiceImpl implements BlogService {
     @Autowired
     BlogRepository blogRepository;
+    @Autowired
+    RedisUtil redisUtil;
+
     @Override
     public Blog getBlog(Long id) {
         return blogRepository.findById(id).get();
@@ -40,7 +45,17 @@ public class BlogServiceImpl implements BlogService {
         String content = b.getContent();
         b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
         //累加浏览次数
-        blogRepository.updateViews(id);
+        Set<DefaultTypedTuple> viewNum = redisUtil.zsReverseRangeWithScores("viewNum");
+        viewNum.forEach(item->{
+            DefaultTypedTuple ii= (DefaultTypedTuple)item;
+            Long nid = Long.valueOf((String)ii.getValue());
+            Integer num = ii.getScore().intValue();
+            if(nid.equals(id)){
+                redisUtil.set("viewNum",id.toString(),num+1);
+                b.setViews(num+1);
+            }
+        }
+        );
         return b;
     }
 
@@ -73,6 +88,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> listRecommendBlogTop(Integer size) {
+        //使用的是更新时间，更新时间倒序排列
         Sort sort = Sort.by(Sort.Direction.DESC,"updateTime");
         Pageable pageable= PageRequest.of(0,size,sort);
         return blogRepository.findTop(pageable);
@@ -136,5 +152,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public void deleteBlog(Long id) {
         blogRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Blog> queryAllBlog() {
+        return blogRepository.findAll();
     }
 }

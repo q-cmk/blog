@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:replace="${title}">详情页</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" th:src="@{/js/semantic.min.js}" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
     <!--文章的排版-->
     <link rel="stylesheet" th:href="@{/css/typo.css}">
     <!--详情页的动态效果-->
@@ -54,50 +54,45 @@
 <footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
     <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
-            <div class="three wide column">
+            <div class="four wide column">
                 <div class="ui inverted link list">
                     <div class="item">
                         <img th:src="@{/image/微信名片.jpg}" class="ui rounded image" alt="" style="width: 110px">
                     </div>
                 </div>
             </div>
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
-                <div id="newblog-container">
-                    <div class="ui inverted link list" th:fragment="newblogList">
-                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog:${newblogs}" th:text="${blog.title}">用户故事(User Story)</a>
-                    </div>
-                </div>
 
-            </div>
-            <div class="three wide column">
+            <div class="four wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
                 <div class="ui inverted link list">
                     <a href="#" class="item m-text-thin" th:text="#{index.Email}">Email：lirenmi@163.com</a>
                     <a href="#" class="item m-text-thin" th:text="#{index.QQ}">QQ：1437810640</a>
                 </div>
             </div>
-            <div class="seven wide column">
+            <div class="eight wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
                 <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
             </div>
         </div>
         <div class="ui inverted section divider"></div>
+
+        <a href="https://beian.miit.gov.cn/" target="https://beian.miit.gov.cn/">豫ICP备2022018497号-1</a>
+
         <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2021 - 2022 Blog Designed by WangQianYe</p>
     </div>
 
 </footer>
 
+<!--js-->
 <th:block th:fragment="script">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js" th:src="@{/js/jquery.min.js}" ></script>
     <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
     <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js" th:src="@{/js/semantic.min.js}"></script>
+
     <script>
         $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
     </script>
 </th:block>
-
-
 </body>
 </html>

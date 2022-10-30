@@ -15,8 +15,11 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    //存放迭代找出的所有子代的集合
+    private List<Comment> tempReplys =new ArrayList<>();
+
     /**
-     *
+     * 通过博客和升序时间查找评论列表
      * @param blogId
      * @return
      */
@@ -31,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     *
+     * 添加评论
      * @param comment
      * @return
      */
@@ -71,11 +74,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     *
+     *  合并所有子代评论，全部归为二级评论
      * @param comments root根节点，blog节点不为空的对象集合。
      */
     private void combineChildren(List<Comment> comments){
         for (Comment comment:comments){
+            //获得每个评论的子评论列表
             List<Comment> replys1 = comment.getReplyComments();
             for (Comment reply1:replys1){
                 //循环迭代，找出子代，存放在tempReplys中
@@ -87,19 +91,24 @@ public class CommentServiceImpl implements CommentService {
             tempReplys = new ArrayList<>();
         }
     }
-    //存放迭代找出的所有子代的集合
-    private List<Comment> tempReplys =new ArrayList<>();
+
 
     /**
      * 递归迭代，
      * @param comment
      */
     private void recursively(Comment comment){
-        tempReplys.add(comment);//顶节点添加到临时存放集合
+        //顶节点添加到临时存放集合
+        tempReplys.add(comment);
+        //如果顶级节点下还有子评论
         if (comment.getReplyComments().size()>0){
+            //得到子评论的列表
             List<Comment> replys = comment.getReplyComments();
+            //遍历子评论列表
             for (Comment reply:replys){
+
                 tempReplys.add(reply);
+                //如果子评论下还有子评论，继续递归调用
                 if (reply.getReplyComments().size()>0){
                     recursively(reply);
                 }

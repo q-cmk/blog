@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 
-/*
-
+/**
+ * 评论控制
  */
 @Controller
 public class CommentController {
@@ -33,6 +33,13 @@ public class CommentController {
         model.addAttribute("comments",commentService.listCommentByBlogId(blogId));
         return "blog::commentList";
     }
+
+    /**
+     * 提交评论
+     * @param comment
+     * @param session
+     * @return
+     */
     @PostMapping("/comments")
     public String post(Comment comment, HttpSession session){
         //获取blog id
@@ -50,7 +57,6 @@ public class CommentController {
         }else{
             comment.setAvatar(avatar);
         }
-
         //保存comment
         commentService.saveComment(comment);
         //重定向回请求"/comments/{blogId}"

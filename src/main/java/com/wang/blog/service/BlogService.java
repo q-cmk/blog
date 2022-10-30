@@ -14,6 +14,7 @@ public interface BlogService {
     Blog getAndConvert(Long id);
     Page<Blog> listBlog(Pageable pageable, BlogQuery blog);
     Page<Blog> listBlog(Pageable pageable);
+    //查询最新的size个博客
     List<Blog> listRecommendBlogTop(Integer size);
     //根据tagId查询，返回一个分页列表
     Page<Blog> listBlog(Long tagId,Pageable pageable);
@@ -25,4 +26,6 @@ public interface BlogService {
     Blog saveBlog(Blog blog);
     Blog updateBlog(Long id,Blog blog);
     void deleteBlog(Long id);
+
+    List<Blog> queryAllBlog();
 }

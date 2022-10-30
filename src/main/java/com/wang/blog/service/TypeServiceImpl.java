@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-
+/**
+ *
+ */
 @Service
 public class TypeServiceImpl implements TypeService {
     @Autowired
@@ -54,7 +56,6 @@ public class TypeServiceImpl implements TypeService {
         Pageable pageable=PageRequest.of(0,size);
         return typeRepository.findTop(pageable);
     }
-
 
     @Transactional
     @Override

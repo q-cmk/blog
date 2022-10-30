@@ -1,7 +1,8 @@
 #ddl-auto:update可以更新数据库中的表，依据实体类与数据库的映射
 #:后面要加一个空格，不然不会生效。
 comment.avatar: /image/tourist.jpg
-
+server:
+  port: 8088
 spring:
   thymeleaf:
     mode: HTML
@@ -15,15 +16,28 @@ spring:
     password: mysql
   jpa:
     hibernate:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    lettuce:
+      pool:
+        max-idle: 16
+        max-active: 32
+        min-idle: 8
+#更新或者创建数据表结构
       ddl-auto: update
-    show-sql: true
+      use-new-id-generator-mappings: false
+    #      控制台显示sql
+    show-sql: false
   messages:
     basename: i18n/messages
 
 #配置日志
 # level 日志级别
 # 设置全局为 info级别
-# com.blog包下为debug级别
+# com.wang.blog包下为debug级别
 # file 设置日志文件的生成路径
 logging:
   level:
