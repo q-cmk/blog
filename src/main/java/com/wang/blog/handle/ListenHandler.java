@@ -8,17 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.redis.core.DefaultTypedTuple;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author wqy
@@ -51,25 +44,5 @@ public class ListenHandler {
         });
         this.logger.info("已写入redis");
     }
-    @PreDestroy
-    public void afterDestroy(){
-        System.out.println("关闭======================");
-        //将Redis数据一次性写入数据库
-        Set<DefaultTypedTuple> viewNum = redisUtil.zsReverseRangeWithScores("viewNum");
-        this.writeNum(viewNum,"viewNum");
-        this.logger.info("redis数据存入数据库完毕");
-        System.out.println("系统关闭===========redis->数据库更新完毕===========");
-    }
-    public void writeNum(Set<DefaultTypedTuple> set,String fieldName){
-        set.forEach(item->{
-            DefaultTypedTuple dt= (DefaultTypedTuple)item;
-            Long id = Long.valueOf((String) dt.getValue());
-            Integer num = dt.getScore().intValue();
 
-            Blog blog = blogService.getBlog(id);
-            blog.setViews(num);
-            blogService.updateBlog(id, blog);
-            this.logger.info(fieldName+"更新完毕");
-        });
-    }
 }

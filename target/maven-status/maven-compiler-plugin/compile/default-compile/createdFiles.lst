@@ -7,6 +7,7 @@ com\wang\blog\NotFoundException.class
 com\wang\blog\vo\BlogQuery.class
 com\wang\blog\util\MarkdownUtils.class
 com\wang\blog\service\BlogServiceImpl.class
+com\wang\blog\util\RedisUtil.class
 com\wang\blog\dao\TagRepository.class
 com\wang\blog\pojo\Comment.class
 com\wang\blog\dao\CommentRepository.class
@@ -21,6 +22,7 @@ com\wang\blog\dao\TypeRepository.class
 com\wang\blog\util\MarkdownUtils$1.class
 com\wang\blog\web\AboutShowController.class
 com\wang\blog\web\admin\TagController.class
+com\wang\blog\handle\ListenHandler.class
 com\wang\blog\pojo\Tag.class
 com\wang\blog\service\TagService.class
 com\wang\blog\pojo\Type.class

@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
@@ -52,9 +51,12 @@ public class LogAspect1 {
       logger.info("--------------doAfter-------------");
    }
 
-   //pointcut("log()")用于指定目标方法
-   //returning接收目标方法返回值，设为下面方法的形参
-   //此处将result的类型声明为Object，意味着对目标方法的返回值不加限制。
+   /**
+    * pointcut("log()")用于指定目标方法
+    * returning接收目标方法返回值，设为下面方法的形参
+    * 此处将result的类型声明为Object，意味着对目标方法的返回值不加限制。
+    * @param result
+    */
    @AfterReturning(returning="result",pointcut="log()")
    public void doAfterReturn(Object result){
       logger.info("Result:()",result);
@@ -86,7 +88,5 @@ public class LogAspect1 {
                  '}';
       }
    }
-
-
 
 }

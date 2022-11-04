@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 类型
+ * @author wqy
+ */
 @Entity
 @Table(name = "t_type")
 public class Type {

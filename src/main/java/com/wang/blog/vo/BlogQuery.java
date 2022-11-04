@@ -1,7 +1,5 @@
 package com.wang.blog.vo;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 public class BlogQuery {
     private String title;
     private Long typeId;

@@ -3,6 +3,9 @@ package com.wang.blog.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * MD5加密
+ */
 public class MD5Utils {
     public static String code(String str){
         try {
@@ -29,7 +32,6 @@ public class MD5Utils {
     }
 
     public static void main(String[] args) {
-//        System.out.println(code("123"));
         System.out.println(code("234"));
     }
 }

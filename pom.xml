@@ -12,7 +12,8 @@
     <artifactId>blog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>blog</name>
-<!--指定打包方式-->
+
+    <!--指定打包方式-->
     <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
@@ -23,6 +24,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <!--配置依赖-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,17 +36,14 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>2.3.12.RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -92,6 +91,7 @@
         </dependency>
     </dependencies>
 
+    <!--plugin配置，用于指定使用的插件-->
     <build>
         <plugins>
             <plugin>

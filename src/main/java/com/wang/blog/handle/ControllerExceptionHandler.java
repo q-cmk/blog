@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author wqy
+ */
 @ControllerAdvice//注解定义全局异常处理类
 // 该注解用于拦截所有标注@Controller的控制器
 public class ControllerExceptionHandler {

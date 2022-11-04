@@ -14,8 +14,6 @@ spring:
     url: jdbc:mysql://localhost:3306/newblog?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
     username: root
     password: mysql
-  jpa:
-    hibernate:
   redis:
     host: 127.0.0.1
     port: 6379
@@ -26,11 +24,11 @@ spring:
         max-idle: 16
         max-active: 32
         min-idle: 8
-#更新或者创建数据表结构
-      ddl-auto: update
+  jpa:
+    show-sql: false #控制台显示sql
+    hibernate:
+      ddl-auto: update #更新或者创建数据表结构
       use-new-id-generator-mappings: false
-    #      控制台显示sql
-    show-sql: false
   messages:
     basename: i18n/messages
 
